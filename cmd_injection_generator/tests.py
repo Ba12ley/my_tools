@@ -36,6 +36,6 @@ def test_brace_expansion():
 
 def test_character_insertion():
     user_command = 'find /usr/share/ | grep root | grep mysql | tail -n 1'
-    user_input = brace_expansion(user_command)
-    expected_result = 'f"ind /u"sr/s"hare/ | g"rep r"oot | g"rep m"ysql | t"ail -n 1'
+    user_input = character_insertion(user_command)
+    expected_result = 'f"i"n"d" "/"u"s"r"/"s"h"a"r"e"/" "|" "g"r"e"p" "r"o"o"t" "|" "g"r"e"p" "m"y"s"q"l" "|" "t"a"i"l" "-"n" "1""'
     assert user_input == expected_result

@@ -30,20 +30,22 @@ def brace_expansion(command):
     return braced_output
 
 def character_insertion(command):
-    pass
-    # final_command = ''
-    # findall_words = re.findall(r'[A-Za-z]+', command)
-    # for word in findall_words:
-    #     for char in len(word):
-    #         print(char)
-    # print(len(command))
-    # print(command[0])
-    # print(len(command)//2)
-    # print(command.split(' '))
-    #
-    # print(findall_words)
+    final_command = ''
+    tmp_string = []
+
+    for new_word in command:
+        tmp_string.append(f'{new_word[:1]}\"{new_word[1:]}')
+    final_command = final_command.join(tmp_string)
+    count_quotes = final_command.count('\"')
+
+    if count_quotes % 2 != 0:
+        return f'{final_command}\"'
+    else:
+        return final_command
+
+
 
 
 
 if __name__ == '__main__':
-    character_insertion(user_command)
+    print(character_insertion(user_command))
