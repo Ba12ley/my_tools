@@ -10,10 +10,20 @@ if __name__ == '__main__':
     url_commands = helpers.special_character_to_url_encode(user_command)
     for command in url_commands:
         command_list.append(command)
+
     command_list.append(helpers.brace_expansion(user_command))
     command_list.append(helpers.character_insertion(user_command))
     command_list.append(helpers.base_64_encode(user_command))
     reversing_list =[]
+    base_command_list = []
+
+    for command in command_list:
+        base_all = helpers.base_64_encode(command)
+        base_command_list.append(base_all)
+
+    for command in base_command_list:
+        command_list.append(command)
+
     for command in command_list:
         reversing_list.append(command)
 
