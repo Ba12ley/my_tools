@@ -1,3 +1,4 @@
 */venv
 */.idea
 /cmd_injection_generator/.pytest_cache/
+/cmd_injection_generator/*.txt
